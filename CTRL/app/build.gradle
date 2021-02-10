@@ -1,0 +1,103 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'  // Google Services plugin
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.ctrlrobotics.ctrl"
+        minSdkVersion 21
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main{
+            jniLibs.srcDirs=['libs']
+        }
+    }
+
+
+    configurations {
+        implementation.exclude module: 'kotlin-stdlib'
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Sanbot SDK
+    implementation(name: 'SanbotOpenSdk_2.0.1.10', ext: 'aar')
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // FireStore, Firebase
+    implementation 'com.google.firebase:firebase-firestore:21.4.3'
+    implementation 'com.google.firebase:firebase-core:17.4.3'
+    implementation 'com.google.firebase:firebase-database:19.3.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-auth:19.4.0'
+
+    // Volley Http
+    implementation 'com.android.volley:volley:1.1.1'
+
+    // Dialogflow V1
+    implementation 'ai.api:sdk:2.0.7@aar'
+    implementation 'ai.api:libai:1.6.12'
+
+    // Event bus
+    implementation 'org.greenrobot:eventbus:3.0.0'
+
+    // WebRTC
+    implementation 'org.webrtc:google-webrtc:1.0.30039'
+
+    // Navigation SDK
+    implementation files('libs/Map_1.5.2.jar')
+
+    // AWS
+    implementation 'com.amazonaws:aws-android-sdk-core:2.16.12'
+    implementation 'com.amazonaws:aws-android-sdk-auth-userpools:2.16.12'
+    implementation 'com.amazonaws:aws-android-sdk-s3:2.16.12'
+    implementation 'com.amazonaws:aws-android-sdk-ddb:2.4.4'
+    implementation 'com.amazonaws:aws-android-sdk-ddb-document:2.4.4'
+
+    // MongoDB
+    implementation 'org.mongodb:stitch-android-sdk:4.1.0'
+
+    // Android Spinkit (loading icons)
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+    // Arduino module
+    implementation 'me.aflak.libraries:arduino:1.4.4'
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
